@@ -1,0 +1,75 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    padding: 20px;
+    line-height: 1.6;
+}
+#quizResultForm {
+    margin-bottom: 20px;
+}
+input[type="text"] {
+    padding: 10px;
+    margin-right: 5px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#logoutContainer {
+    position: absolute; /* or 'fixed' if you want it to stay in place when scrolling */
+    top: 10px; /* Adjust the value as needed */
+    right: 10px; /* Adjust the value as needed */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+#logoutButton {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#logoutButton:hover {
+    background-color: #c82333;
+}
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+#quizResult {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 4px;
+}
+h1 {
+    color: #333;
+}
+.result-item {
+    margin: 10px 0;
+}
+.result-item strong {
+    font-weight: bold;
+}
+a {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+a:hover {
+    background-color: #0056b3;
+}

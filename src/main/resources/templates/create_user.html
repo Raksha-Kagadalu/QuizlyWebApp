@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+    <link rel="stylesheet" href="/css/create_user.css">
+</head>
+<body>
+<div id="logoutContainer">
+    <a href="/admin/dashboard">Back to Dashboard</a>
+</div>
+
+<div id="header">
+    <h1>Create New User</h1>
+</div>
+<br>
+<br>
+<div th:if="${successMessage}" th:text="${successMessage}" class="alert alert-success"></div>
+<div th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-danger"></div>
+
+<form action="#" th:action="@{/admin/createUser}" th:object="${user}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" th:field="*{username}" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" th:field="*{password}" required>
+
+    <label for="role">Role:</label>
+    <select id="role" th:field="*{role}">
+        <option value="ADMIN">Admin</option>
+        <option value="PROFESSOR">Professor</option>
+        <option value="STUDENT">Student</option>
+    </select>
+<br>
+    <button type="submit">Create User</button>
+</form>
+</body>
+</html>

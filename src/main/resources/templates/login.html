@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Log in</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 500px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 4px;
+    }
+    input[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .failed {
+      color: red;
+    }
+    .sucess {
+      color: mediumseagreen;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+  <h1>Welcome to Quizly!</h1>
+  <hr>
+  </br>
+  <div th:if="${param.error}" class="failed">
+    Invalid username and password.
+  </div>
+  <div th:if="${param.logout}" class="sucess">
+    You have been logged out.
+  </div>
+  <form action="#" th:action="@{/authenticateTheUser}" method="POST">
+    <p>
+      <input type="text" name="username" placeholder="Username"/>
+    </p>
+    <p>
+      <input type="password" name="password" placeholder="Password"/>
+    </p>
+    <input type="submit" value="Log in" />
+  </form>
+</div>
+</body>
+</html>

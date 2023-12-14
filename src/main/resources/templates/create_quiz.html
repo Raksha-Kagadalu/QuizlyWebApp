@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Quiz</title>
+  <link rel="stylesheet" href="/css/createQuiz.css">
+</head>
+<body>
+<div id="logoutContainer">
+  <button onclick="location.href='/professor/dashboard'" class="back-button">Back to Dashboard</button>
+</div>
+<h1>Create a New Quiz</h1>
+<div class="content">
+  <form th:action="@{/professor/createquiz}" th:object="${quiz}" method="post">
+    <div class="form-group">
+      <label for="title">Quiz Title:</label>
+      <input type="text" id="title" name="title" th:field="*{title}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="questionContent">Question:</label>
+      <input type="text" id="questionContent" name="questionContent" th:field="*{questionContent}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="optionA">Option A:</label>
+      <input type="text" id="optionA" name="optionA" th:field="*{optionA}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="optionB">Option B:</label>
+      <input type="text" id="optionB" name="optionB" th:field="*{optionB}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="optionC">Option C:</label>
+      <input type="text" id="optionC" name="optionC" th:field="*{optionC}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="optionD">Option D:</label>
+      <input type="text" id="optionD" name="optionD" th:field="*{optionD}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="correctAnswer">Correct Answer:</label>
+      <select id="correctAnswer" name="correctAnswer" th:field="*{correctAnswer}" required>
+        <option value="">Select Correct Answer</option>
+        <option value="A">Option A</option>
+        <option value="B">Option B</option>
+        <option value="C">Option C</option>
+        <option value="D">Option D</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="Create Quiz" />
+    </div>
+  </form>
+</div>
+</body>
+</html>

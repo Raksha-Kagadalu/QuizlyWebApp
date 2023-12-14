@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz Page</title>
+    <link rel="stylesheet" href="/css/quizResultStyles.css">
+
+</head>
+<body>
+    <h1>Quiz Name: <span th:text="${quiz.title}">Quiz Title</span></h1>
+    <hr>
+    <div id="quizResult">
+    <form th:action="@{/student/submitquiz}" th:object="${response}" method="post" class="quiz-form">
+        <div class="question">
+            <h3>Question</h3>
+            <p th:text="${quiz.questionContent}">Question content will be displayed here</p>
+        </div>
+</br>
+        <!-- Displaying the quiz options as radio buttons -->
+        <div class="options">
+            <div>
+                <input type="radio" id="optionA" name="selectedAnswer" value="A" required>
+                <label th:text="${quiz.optionA}" for="optionA">Option A</label>
+            </div>
+            </br>
+            <div>
+                <input type="radio" id="optionB" name="selectedAnswer" value="B">
+                <label th:text="${quiz.optionB}" for="optionB">Option B</label>
+            </div>
+            </br>
+            <div>
+                <input type="radio" id="optionC" name="selectedAnswer" value="C">
+                <label th:text="${quiz.optionC}" for="optionC">Option C</label>
+            </div>
+            </br>
+            <div>
+                <input type="radio" id="optionD" name="selectedAnswer" value="D">
+                <label th:text="${quiz.optionD}" for="optionD">Option D</label>
+            </div>
+            </br>
+        </div>
+
+        <!-- Hidden field to store the unique quiz ID -->
+        <input type="hidden" name="uniqueQuizID" th:value="${quiz.uniqueQuizID}" />
+
+        <!-- Error message display -->
+        <div th:if="${errorMessage}" th:text="${errorMessage}" class="error-message"></div>
+
+        <button type="submit">Submit Answer</button>
+    </form>
+    </div>
+<div id="logoutContainer">
+    <a href="/student/dashboard" class="back-link">Back to Dashboard</a>
+</div>
+</body>
+</html>
+

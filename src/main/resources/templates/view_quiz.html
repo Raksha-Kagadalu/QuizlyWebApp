@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>View Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    p, li {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    .dashboard-link {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dashboard-link:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Quiz Details</h1>
+  <a href="/professor/dashboard" class="dashboard-link">Back to Dashboard</a>
+</div>
+<p><strong>Question:</strong> <span th:text="${quiz.questionContent}">Question content will be displayed here</span></p>
+<div>
+  <p><strong>Options:</strong></p>
+  <ul>
+    <li><strong>A:</strong> <span th:text="${quiz.optionA}">Option A content</span></li>
+    <li><strong>B:</strong> <span th:text="${quiz.optionB}">Option B content</span></li>
+    <li><strong>C:</strong> <span th:text="${quiz.optionC}">Option C content</span></li>
+    <li><strong>D:</strong> <span th:text="${quiz.optionD}">Option D content</span></li>
+  </ul>
+</div>
+<p><strong>Correct Answer:</strong> <span th:text="${quiz.correctAnswer}">Correct answer will be displayed here</span></p>
+
+</body>
+</html>

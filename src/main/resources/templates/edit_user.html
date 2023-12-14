@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/css/create_user.css">
+</head>
+<body>
+<div id="logoutContainer">
+  <a href="/admin/dashboard">Back to Dashboard</a>
+</div>
+  <div id="header">
+  <h1>Edit User</h1>
+  </div>
+<br>
+<br>
+  <form action="#" th:action="@{/admin/updateUser}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{password}" />
+      <label for="username">Username:</label>
+      <input type="text" id="username" th:field="*{username}" />
+      <label for="role">Role:</label>
+      <select id="role" name="role" th:field="*{role}">
+        <option value="ADMIN">Admin</option>
+        <option value="PROFESSOR">Professor</option>
+        <option value="STUDENT">Student</option>
+      </select>
+<br>
+    <button type="submit">Update User</button>
+  </form>
+
+</body>
+</html>

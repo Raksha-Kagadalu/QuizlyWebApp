@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Analytics</title>
+  <!-- Include Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Include the Chart.js datalabels plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <link rel="stylesheet" href="/css/quizAnalytics.css">
+</head>
+<body>
+<div class="top-bar">
+  <h1>Quiz Analytics</h1>
+  <a href="/professor/dashboard" class="dashboard-link">Back to Dashboard</a>
+</div>
+<div class="container">
+  <div>
+    <label for="uniqueQuizID">Enter Unique Quiz ID:</label>
+    <input type="text" id="uniqueQuizID" placeholder="Unique Quiz ID">
+    <button id="fetchAnalytics">Fetch Analytics</button>
+    <br><br><br><br>
+  </div>
+  <div class="chart-container">
+    <canvas id="analyticsChart"></canvas>
+  </div>
+  <div class="quiz-info">
+    <h2 id="quizQuestion"></h2>
+    <p id="quizOptionA"></p>
+    <p id="quizOptionB"></p>
+    <p id="quizOptionC"></p>
+    <p id="quizOptionD"></p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('fetchAnalytics').addEventListener('click', function() {
+    var uniqueQuizID = document.getElementById('uniqueQuizID').value;
+    fetch('/professor/api/quizAnalytics?uniqueQuizID=' + uniqueQuizID)
+            .then(response => response.json())
+            .then(data => {
+              var ctx = document.getElementById('analyticsChart').getContext('2d');
+              if(window.myBarChart != undefined)
+                window.myBarChart.destroy();
+
+              window.myBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: ['Option A', 'Option B', 'Option C', 'Option D'],
+                  datasets: [{
+                    label: 'Number of Responses',
+                    data: [
+                      data.counts.A || 0, // Using '|| 0' to handle undefined or null values
+                      data.counts.B || 0,
+                      data.counts.C || 0,
+                      data.counts.D || 0
+                    ],
+                    backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#FF5722'],
+                    borderColor: ['#388E3C', '#1976D2', '#FFA000', '#E64A19'],
+                    borderWidth: 1
+                  }]
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true
+                    }
+                  },
+                  plugins: {
+                    legend: {
+                      display: false // Add this line to hide the legend
+                    },
+                    datalabels: {
+                      color: '#000',
+                      anchor: 'end',
+                      align: 'top',
+                      formatter: Math.round
+                    }
+                  }
+                }
+              });
+
+              // Display the question and options
+              document.getElementById('quizQuestion').textContent = 'Question: ' + data.question;
+              document.getElementById('quizOptionA').textContent = 'A: ' + data.options.A;
+              document.getElementById('quizOptionB').textContent = 'B: ' + data.options.B;
+              document.getElementById('quizOptionC').textContent = 'C: ' + data.options.C;
+              document.getElementById('quizOptionD').textContent = 'D: ' + data.options.D;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('Error fetching quiz analytics');
+            });
+  });
+</script>
+</body>
+</html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Quiz Analytics</title>-->
+<!--  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+<!--  <style>-->
+<!--    body {-->
+<!--      font-family: Arial, sans-serif;-->
+<!--      text-align: center;-->
+<!--      background-color: #f7f7f7;-->
+<!--      padding: 20px;-->
+<!--    }-->
+<!--    .container {-->
+<!--      width: 60%;-->
+<!--      margin: auto;-->
+<!--      background-color: #fff;-->
+<!--      padding: 20px;-->
+<!--      border-radius: 8px;-->
+<!--      box-shadow: 0 4px 8px rgba(0,0,0,0.1);-->
+<!--    }-->
+<!--    #analyticsChart {-->
+<!--      max-width: 600px;-->
+<!--      margin: 20px auto;-->
+<!--    }-->
+<!--    input[type="text"] {-->
+<!--      padding: 10px;-->
+<!--      border: 1px solid #ccc;-->
+<!--      border-radius: 4px;-->
+<!--      width: 300px;-->
+<!--    }-->
+<!--    button {-->
+<!--      padding: 10px 15px;-->
+<!--      background-color: #007bff;-->
+<!--      color: white;-->
+<!--      border: none;-->
+<!--      border-radius: 4px;-->
+<!--      cursor: pointer;-->
+<!--      margin-left: 10px;-->
+<!--    }-->
+<!--    button:hover {-->
+<!--      background-color: #0056b3;-->
+<!--    }-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--  <h1>Quiz Analytics</h1>-->
+<!--  <label for="uniqueQuizID">Enter Unique Quiz ID:</label>-->
+<!--  <input type="text" id="uniqueQuizID" placeholder="Unique Quiz ID">-->
+<!--  <button id="fetchAnalytics">Fetch Analytics</button>-->
+
+<!--  <canvas id="analyticsChart"></canvas>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--  document.getElementById('fetchAnalytics').addEventListener('click', function() {-->
+<!--    var uniqueQuizID = document.getElementById('uniqueQuizID').value;-->
+<!--    fetch('/professor/api/quizAnalytics?uniqueQuizID=' + uniqueQuizID)-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--              var ctx = document.getElementById('analyticsChart').getContext('2d');-->
+<!--              if(window.bar != undefined)-->
+<!--                window.bar.destroy();-->
+<!--              window.bar = new Chart(ctx, {-->
+<!--                type: 'bar',-->
+<!--                data: {-->
+<!--                  labels: ['Option A', 'Option B', 'Option C', 'Option D'],-->
+<!--                  datasets: [{-->
+<!--                    label: 'Number of Students',-->
+<!--                    data: [data['A'], data['B'], data['C'], data['D']],-->
+<!--                    backgroundColor: [-->
+<!--                      '#4CAF50', '#2196F3', '#FFC107', '#FF5722'-->
+<!--                    ],-->
+<!--                    borderColor: [-->
+<!--                      '#388E3C', '#1976D2', '#FFA000', '#E64A19'-->
+<!--                    ],-->
+<!--                    borderWidth: 1-->
+<!--                  }]-->
+<!--                },-->
+<!--                options: {-->
+<!--                  scales: {-->
+<!--                    y: {-->
+<!--                      beginAtZero: true,-->
+<!--                      stepSize: 5-->
+<!--                    }-->
+<!--                  },-->
+<!--                  plugins: {-->
+<!--                    datalabels: {-->
+<!--                      color: '#000',-->
+<!--                      anchor: 'end',-->
+<!--                      align: 'top',-->
+<!--                      formatter: Math.round-->
+<!--                    }-->
+<!--                  }-->
+<!--                }-->
+<!--              });-->
+<!--            })-->
+<!--            .catch(error => {-->
+<!--              console.error('Error:', error);-->
+<!--              alert('Error fetching quiz analytics');-->
+<!--            });-->
+<!--  });-->
+<!--</script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+

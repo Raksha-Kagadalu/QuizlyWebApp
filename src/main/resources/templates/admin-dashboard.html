@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Homepage</title>
+  <link rel="stylesheet" href="/css/dashBoardStyles.css">
+</head>
+<body>
+<div id="logoutContainer">
+  <form action="#" th:action="@{/logout}" method="POST">
+    <button type="submit">Logout</button>
+  </form>
+</div>
+<div id="header">
+  <h2>Welcome to Quizly!</h2>
+</div>
+<div class="content">
+  <h4>ADMIN Dashboard:</h4>
+
+  <div class="grid-container">
+    <div class="grid-item">
+      <a href="/admin/createUser">Create New User</a>
+    </div>
+    <div class="grid-item">
+      <a href="/admin/viewUsers">View Users</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

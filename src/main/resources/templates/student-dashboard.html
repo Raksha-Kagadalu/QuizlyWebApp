@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Homepage</title>
+    <link rel="stylesheet" href="/css/dashBoardStyles.css">
+</head>
+<body>
+<div id="logoutContainer">
+    <form action="#" th:action="@{/logout}" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+<div id="header">
+    <h1>Welcome to Quizly!</h1>
+</div>
+<div class="content">
+    <h4>Student Dashboard:</h4>
+    <div class="grid-container">
+        <div class="grid-item">
+            <a href="/student/takequiz">Take Quiz</a>
+        </div>
+        <div class="grid-item">
+            <a href="/student/viewQuizResult">View Quiz Result</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

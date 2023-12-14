@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter the quiz ID</title>
+    <link rel="stylesheet" href="/css/quizResultStyles.css">
+</head>
+<body>
+<h1>Search Quiz:</h1>
+<!-- Error message display -->
+<div th:if="${error}" th:text="${error}" style="color: red;"></div>
+
+<form th:action="@{/student/quiz}" method="get">
+  <input type="text" name="quizId" placeholder="Enter Quiz ID" required>
+  <button type="submit">Start Quiz</button>
+</form>
+<div id="logoutContainer">
+<a href="/student/dashboard">Back to Dashboard</a>
+</div>
+</body>
+</html>

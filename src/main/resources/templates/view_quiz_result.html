@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="/css/quizResultStyles.css">
+</head>
+<body>
+
+<h1>Quiz Result Checker</h1>
+<div id="logoutContainer">
+    <a href="/student/dashboard">Back to Dashboard</a>
+</div>
+<form id="quizResultForm">
+    <input type="text" id="uniqueQuizID" name="uniqueQuizID" placeholder="Enter Unique Quiz ID" required>
+    <button type="button" id="searchQuizResult">Search</button>
+</form>
+
+<div id="quizResult">
+    <!-- The quiz result will be displayed here -->
+</div>
+
+<script>
+    document.getElementById('searchQuizResult').addEventListener('click', function() {
+        var uniqueQuizID = document.getElementById('uniqueQuizID').value;
+        fetch('/student/api/quizresult?uniqueQuizID=' + uniqueQuizID)
+            .then(function(response) {
+                if (!response.ok) {
+                    throw new Error('Quiz result not found');
+                }
+                return response.json();
+            })
+            .then(function(data) {
+                //console.log(data);
+                var resultHtml = '<div class="result-item"><strong>Question:</strong> ' + data.questionContent + '</div>' +
+                    '<div class="result-item"><strong>Your Answer:</strong> ' + data.selectedAnswer + ' (' + data.selectedAnswerContent + ')</div>' +
+                    '<div class="result-item"><strong>Correct Answer:</strong> ' + data.correctAnswer + ' (' + data.correctAnswerContent + ')</div>';
+                document.getElementById('quizResult').innerHTML = resultHtml;
+            })
+            .catch(function(error) {
+                document.getElementById('quizResult').innerHTML = error.message;
+            });
+    });
+</script>
+
+</body>
+</html>

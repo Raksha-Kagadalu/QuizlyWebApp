@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Sumbit Sucess</title>
+    <link rel="stylesheet" href="/css/quizResultStyles.css">
+</head>
+<body>
+<div id="logoutContainer">
+    <form action="#" th:action="@{/logout}" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+<br>
+<div id="quizResult">
+<h2>Successfully submitted the quiz!</h2>
+</div>
+<br>
+
+&nbsp&nbsp&nbsp&nbsp<a href="/student/viewQuizResult">View Quiz Result</a>
+&nbsp&nbsp<a href="/student/dashboard">Back to Dashboard</a>
+</body>
+</html>
